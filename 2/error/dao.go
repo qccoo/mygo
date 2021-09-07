@@ -31,7 +31,8 @@ func fakeDbQueryHandler(input string) ([]string, error) {
         return nil, sql.ErrConnDone
     case "TD":
         return nil, sql.ErrTxDone
-    default: return []string{"fake-result", input}, nil
+    default: 
+        return []string{"fake-result", input}, nil
     }
 }
 
