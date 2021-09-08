@@ -11,11 +11,11 @@ func QueryRow(input string) ([]string, error) {
     result, err := fakeDbQueryHandler(input)
     if err != nil {
         if err == sql.ErrNoRows {
-            // 没有对应查询条件的行，相应处理逻辑, 不同于其他error
+            // No rows found for the given condition, handled differently
             fmt.Println("No result found for the input", input)
             return []string{}, nil
         } else {
-            // 其他错误wrap抛给上层(或处理时可考虑log.Fatal)
+            // Wrap and throw
             return nil, errors.Wrap(err, "Query failed")
         }
     }
@@ -42,9 +42,9 @@ func checkPrint(input string) {
     r, err := QueryRow(input)
     if err != nil {
         fmt.Printf("FATAL: %+v\n", err)
-        return
+    } else {
+        fmt.Println("Result:", r)
     }
-    fmt.Println("Result:", r)
 }
 
 func main() {
