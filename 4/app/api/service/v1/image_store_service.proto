@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package imagestore.api.service.v1;
+
+option go_package = "github.com/qccoo/imagestore/api/service/v1";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+
+service ImageStoreService {
+
+  rpc GetImage(GetImageRequest) returns (Image) {
+    option (google.api.http) = {
+      get: "v1/images/{image_id}"
+    };
+  }
+
+  rpc ListImages(ListImagesRequest) returns (ListImagesResponse) {
+    option (google.api.http) = {
+      get: "v1/images"
+    };
+  }
+
+  // TODO: Design other APIs
+  
+}
+
+message Image {
+  string id = 1;
+  string text = 2;
+  string addr = 3;
+}
+
+message GetImageRequest {
+  string image_id = 1 [
+    (google.api.field.behavior) = REQUIRED
+  ];
+}
+
+message ListImagesRequest {
+  // TODO: Add other criteria.
+
+  int32 page_size = 1  [
+    (google.api.field.behavior) = OPTIONAL
+  ];
+  string page_token = 2  [
+    (google.api.field.behavior) = OPTIONAL
+  ];
+}
+
+message ListImagesResponse {
+  repeated Image images = 1;
+  // If set, can be used in subsequent request.
+  string next_page_token = 2;
+}
