@@ -11,7 +11,7 @@ service ImageStoreService {
 
   rpc GetImage(GetImageRequest) returns (Image) {
     option (google.api.http) = {
-      get: "v1/images/{image_id}"
+      get: "v1/images/{id}"
     };
   }
 
@@ -32,7 +32,7 @@ message Image {
 }
 
 message GetImageRequest {
-  string image_id = 1 [
+  string id = 1 [
     (google.api.field.behavior) = REQUIRED
   ];
 }
