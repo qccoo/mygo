@@ -5,5 +5,5 @@ import (
 )
 
 func ConvertImageAddr(file string) string {
-	return fmt.Sprintf("/qccoo/my/images/%s", file)
+    return fmt.Sprintf("/qccoo/my/images/%s", file)
 }
